@@ -212,13 +212,13 @@ for(i in 1:10)
 <h1>accuracy &amp; sample error</h1>
 <p>The accuracy of 10 fold cross validation will be mean of the vector “result”.<br />
 sample_error is just (100 - accuracy%).</p>
-<p>Therefore, accuracy is “99.94904”&quot; and sample error is “0.5096”.</p>
+<p>Therefore, accuracy is “99.94904%”&quot; and sample error is “0.05096%”.</p>
 <pre class="r"><code>accuracy = sum(result)/10
 print (accuracy)</code></pre>
 <pre><code>## [1] 99.94904</code></pre>
-<pre class="r"><code>sample_error = 1 - accuracy
+<pre class="r"><code>sample_error = 100 - accuracy
 print(sample_error)</code></pre>
-<pre><code>## [1] -98.94904</code></pre>
+<pre><code>## [1] 0.0509632</code></pre>
 </div>
 
 

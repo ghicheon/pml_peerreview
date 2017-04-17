@@ -117,11 +117,11 @@ for(i in 1:10)
 The accuracy of 10 fold cross validation will be mean of the vector "result".     
 sample_error is just (100 - accuracy%).   
 
-Therefore, accuracy is "99.94904"" and sample error is "0.5096".
+Therefore, accuracy is "99.94904%"" and sample error is "0.05096%".
 ```{r}
 accuracy = sum(result)/10
 print (accuracy)
 
-sample_error = 1 - accuracy
+sample_error = 100 - accuracy
 print(sample_error)
 ```
