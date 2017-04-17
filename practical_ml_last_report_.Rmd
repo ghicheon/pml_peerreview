@@ -10,15 +10,15 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Synopsis
-This assignment is about predicting the phisical activity by some data. classe feature of training data is the target that we're going to predict.    
-This dataset has more than 100 features and some of them is meaningless such as X and user name and so on. I extracted numeric data  because umeric data is more meaningful than others.   
-At first, I tried randomforest of caret. But it didnt's work. I found some solution about it in discussion board. But it still took so long. I decided to use randomForest package in direct.   
+This assignment is about predicting the physical activity by some data. classe feature of training data is the target that we're going to predict.    
+This dataset has more than 100 features and some of them is meaningless such as X and user name and so on. I extracted numeric data because numeric data is more meaningful than others.   
+At first, I tried randomforest of caret. But it didn't work. I found some solution about it in discussion board. But it still took so long. I decided to use randomForest package in direct.   
 10 fold cross validation is implemented from the scratch. There must be a better way.But I wanted to experience it by myself.
 The accuracy is so high. it's more than 99%.  
 
 # Loading data & basic information
 This dataset is not big. 
-seed is not needed at the moment.it's added just for the future
+seed is not needed at the moment. It's added just for the future use.
 ```{r}
 #library(caret)
 library(randomForest)
@@ -52,9 +52,9 @@ essential$classe <- training$classe
 
 
 # training using whole training dataset 
-random forest of caret package doesn't seem to work well.   
+random forest module of caret package doesn't seem to work well.   
 randomForest is used directly.  
-perfect score(20/20) in prediction quiz was gained.
+Perfect score(20/20) in prediction quiz was gained.
 
 ```{r}
 ##it doesn't work...
@@ -73,13 +73,14 @@ print(out)
 
 
 # 10 fold cross validation.
-essential is the feature extracted dataset from upper.  
+essential is the feature extracted dataset from the upper code.  
 "kfold" feature is added to identify which fold it is.
-1:10 is repeated  (nrows - nrows%%10)/10 times. nrows - nrows%%10 calculate the rest. next for loop is for appending kfold value to the rest rows.  
-If kfold is 1 ,it means it's 1 fold. If kfold is 2, it means it's 2 fold and so on.
-grep function is for removing kfold becuase kfold is just added for cross valication.   
-each accuracy is saved in result vector.at last, overall 10 fold cross validation accuracy is showed.
-
+1:10 is repeated  (nrows - nrows%%10)/10 times. nrows - nrows%%10 calculate the rest. The second "for loop"" is for appending kfold feature value to the leftover.  
+If kfold is 1 ,it means it's 1 fold. If kfold is 2, it means it's 2 fold and so on.   
+grep function is for removing kfold becuase kfold is just added for identifying which fold it is.     
+each accuracy is saved in result vector.   
+correct_cnt can be obtained by comparing the prediction and the features classe(correction answer).   
+The vector result is for stacking  accuracy of each iteration. This value is used for overall accuracy & sample error on the next code chunk.
 
 ```{r}
 
@@ -108,7 +109,19 @@ for(i in 1:10)
   result <- c(result, (correct_cnt /(nrows/10))*100 )
 }
 
-#10 fold cross validation accuracy!
-print( sum(result)/10)
+
 ```
 
+
+# accuracy & sample error
+The accuracy of 10 fold cross validation will be mean of the vector "result".     
+sample_error is just (100 - accuracy%).   
+
+Therefore, accuracy is "99.94904"" and sample error is "0.5096".
+```{r}
+accuracy = sum(result)/10
+print (accuracy)
+
+sample_error = 1 - accuracy
+print(sample_error)
+```
